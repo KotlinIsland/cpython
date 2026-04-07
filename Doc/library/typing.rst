@@ -1980,7 +1980,7 @@ without the dedicated syntax, as documented below.
 
 .. _typevartuple:
 
-.. class:: TypeVarTuple(name, *, default=typing.NoDefault)
+.. class:: TypeVarTuple(name, *, bound=None, covariant=False, contravariant=False, infer_variance=False, default=typing.NoDefault)
 
    Type variable tuple. A specialized form of :ref:`type variable <typevar>`
    that enables *variadic* generics.
@@ -2090,6 +2090,22 @@ without the dedicated syntax, as documented below.
 
       The name of the type variable tuple.
 
+   .. attribute:: __bound__
+
+      The upper bound of the type variable tuple, if any.
+
+   .. attribute:: __covariant__
+
+      Whether the type variable tuple has been explicitly marked as covariant.
+
+   .. attribute:: __contravariant__
+
+      Whether the type variable tuple has been explicitly marked as contravariant.
+
+   .. attribute:: __infer_variance__
+
+      Whether the type variable tuple's variance should be inferred by type checkers.
+
    .. attribute:: __default__
 
       The default value of the type variable tuple, or :data:`typing.NoDefault` if it
@@ -2116,6 +2132,12 @@ without the dedicated syntax, as documented below.
 
       .. versionadded:: 3.13
 
+   Type variable tuples created with ``covariant=True`` or
+   ``contravariant=True`` can be used to declare covariant or contravariant
+   generic types.  The ``bound`` argument is also accepted, similar to
+   :class:`TypeVar`.  However the actual semantics of these keywords are yet to
+   be decided.
+
    .. versionadded:: 3.11
 
    .. versionchanged:: 3.12
@@ -2126,6 +2148,11 @@ without the dedicated syntax, as documented below.
    .. versionchanged:: 3.13
 
       Support for default values was added.
+
+   .. versionchanged:: 3.15
+
+      Added support for the ``bound``, ``covariant``, ``contravariant``, and
+      ``infer_variance`` parameters.
 
 .. class:: ParamSpec(name, *, bound=None, covariant=False, contravariant=False, default=typing.NoDefault)
 
